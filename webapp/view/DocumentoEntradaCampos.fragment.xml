@@ -1,0 +1,338 @@
+<core:FragmentDefinition
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.ui.layout.form">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="formDocumento"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="{view>/titulo}"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="0"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="3"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="false">
+			<f:content>
+				<core:Title/>
+				<Label text="Tipo" labelFor="tipo"/>
+				<Input selectedKey="{
+							path: 'documento>/Tipo',
+							type: 'sap.ui.model.odata.type.Int32'
+						}"
+					required="true"
+					textFormatMode="KeyValue"
+					showSuggestion="true"
+					showValueHelp="true"
+					valueHelpRequest="handleSearchTipo"
+					suggestionItems="{
+						path: '/TipoDocumentos'
+					}"
+					id="tipo">
+					<suggestionItems>
+						<core:ListItem key="{Id}" text="{Descricao}"/>
+					</suggestionItems>
+				</Input>
+				
+				<Label text="Tipo de Documento" labelFor="tipodocumento" required="true"/>
+				<Select id="tipodocumento" selectedKey="{documento>/TipoDocumento}">
+					<core:Item key="BENEFICIAMENTO" text="BENEFICIAMENTO"/>
+					<core:Item key="COMPLEMENTOICMS" text="COMPLEMENTO - ICMS"/>
+					<core:Item key="COMPLEMENTOIPI" text="COMPLEMENTO - IPI"/>
+					<core:Item key="COMPLEMENTOPRECO" text="COMPLEMENTO - PREÇO"/>
+					<core:Item key="DEVOLUCAO" text="DEVOLUÇÃO"/>
+					<core:Item key="NORMAL" text="NORMAL"/>
+				</Select>
+				
+				<Label text="Tipo de Formulário" labelFor="tipoformulario" required="true"/>
+				<Select id="tipoformulario" selectedKey="{documento>/TipoFormulario}">
+					<core:Item key="PROPRIO" text="PRÓPRIO"/>
+					<core:Item key="TERCEIROS" text="TERCEIROS"/>
+				</Select>
+				
+				<Label text="Parceiro" labelFor="parceiro"/>
+				<Input selectedKey="{
+							path: 'documento>/Parceiro',
+							type: 'sap.ui.model.odata.type.Int32'
+						}"
+					required="true"
+					textFormatMode="KeyValue"
+					showSuggestion="true"
+					showValueHelp="true"
+					valueHelpRequest="handleSearchParceiro"
+					suggestionItems="{
+						path: '/ParceiroNegocios'
+					}"
+					id="parceiro">
+					<suggestionItems>
+						<core:ListItem key="{Id}" text="{RazaoSocial}"/>
+					</suggestionItems>
+				</Input>
+				
+				<Label text="Emissão" labelFor="emissao" required="true"/>
+				<DatePicker id="emissao" dateValue="{documento>/Emissao}"
+					displayFormat="dd.MM.yyyy" placeholder="dd.mm.aaaa"/>
+				
+				<Label text="Número" labelFor="numero"/>
+				<Input id="numero" value="{documento>/Numero}"/>
+				
+				<Label text="Série" labelFor="serie"/>
+				<Input id="serie" value="{documento>/Serie}"/>
+				
+				<Label text="Número NF - Produtor Rural" labelFor="numeronf"/>
+				<Input id="numeronf" value="{documento>/NumeroNFProdutorRural}"/>
+				
+				<Label text="Série NF - Produtor Rural" labelFor="serienf"/>
+				<Input id="serienf" value="{documento>/SerieNFProdutorRural}"/>
+				
+				<Label text="Contrato de Compra" labelFor="contrato"/>
+				<Input selectedKey="{documento>/ContratoCompra}"
+					textFormatMode="KeyValue"
+					showSuggestion="true"
+					showValueHelp="true"
+					valueHelpRequest="handleSearchContrato"
+					suggestionItems="{
+						path: '/ContratoCompras'
+					}"
+					id="contrato">
+					<suggestionItems>
+						<core:ListItem key="{Numero}" text="{Numero}"/>
+					</suggestionItems>
+				</Input>
+				
+				<Label text="Condição de Pagamento" labelFor="condicao"/>
+				<Input selectedKey="{
+							path: 'documento>/CondicaoPagamento',
+							type: 'sap.ui.model.odata.type.Int32'
+						}"
+					textFormatMode="KeyValue"
+					showSuggestion="true"
+					showValueHelp="true"
+					valueHelpRequest="handleSearchCondicao"
+					suggestionItems="{
+						path: '/CondicaoPagamentos'
+					}"
+					id="condicao">
+					<suggestionItems>
+						<core:ListItem key="{Id}" text="{Descricao}"/>
+					</suggestionItems>
+				</Input>
+				
+				<core:Title/>
+				<Label text="Chave de Acesso" labelFor="chave"/>
+				<Input id="chave" value="{documento>/ChaveAcesso}"/>
+				
+				<Label text="Frete" labelFor="frete"/>
+				<Input id="frete" value="{
+					path: 'documento>/Frete',
+					type: 'sap.ui.model.odata.type.Single',
+					formatOptions: {
+						decimals: 2,
+						decimalSeparator: ','
+					}
+				}"/>
+				
+				<Label text="Despesa" labelFor="despesa"/>
+				<Input id="despesa" value="{
+					path: 'documento>/Despesa',
+					type: 'sap.ui.model.odata.type.Single',
+					formatOptions: {
+						decimals: 2,
+						decimalSeparator: ','
+					}
+				}"/>
+				
+				<Label text="Seguro" labelFor="seguro"/>
+				<Input id="seguro" value="{
+					path: 'documento>/Seguro',
+					type: 'sap.ui.model.odata.type.Single',
+					formatOptions: {
+						decimals: 2,
+						decimalSeparator: ','
+					}
+				}"/>
+				
+				<Label text="Total" labelFor="total"/>
+				<Input id="total" value="{
+					path: 'documento>/Total',
+					type: 'sap.ui.model.odata.type.Single',
+					formatOptions: {
+						decimals: 2,
+						decimalSeparator: ','
+					}
+				}"/>
+				
+				<Label text="Observações" labelFor="obs"/>
+				<TextArea id="obs" value="{documento>/Observacoes}" rows="6"/>
+				
+				<Label text="Informaçoes Adicionais" labelFor="infoadc"/>
+				<TextArea id="infoadc" value="{documento>/InformacoesAdcionionais}" rows="6"/>
+			</f:content>
+		</f:SimpleForm>
+		<t:Table id="tableDocumentoItens"
+			rows="{itens>/}"
+			class="sapUiSizeCondensed"
+			selectionMode="Single"
+			selectionBehavior="Row"
+			enableSelectAll="false"
+			editable="true"
+			visibleRowCountMode="Auto"
+			enableBusyIndicator="true"
+			alternateRowColors="true"
+			enableCustomFilter="false">
+			<t:toolbar>
+				<Toolbar>
+					<Title text="Inserir item ao Documento"/>
+					<ToolbarSpacer/>
+					<Button id="inserir" icon="sap-icon://add" press="onInserirLinha"/>
+					<Button id="remover" icon="sap-icon://delete" press="onRemoverLinha"/>
+				</Toolbar>
+			</t:toolbar>
+			<t:columns>
+				<t:Column>
+					<Label text="Natureza"/>
+					<t:template>
+						<Input selectedKey="{itens>Natureza}"
+							textFormatMode="KeyValue"
+							showSuggestion="true"
+							showValueHelp="true"
+							valueHelpRequest="handleSearchNatureza"
+							suggestionItems="{
+								path: '/NaturezaOperacaos',
+								templateShareable: true
+							}"
+							id="natureza">
+							<suggestionItems>
+								<core:ListItem key="{Codigo}" text="{Descricao}"/>
+							</suggestionItems>
+						</Input>
+					</t:template>
+				</t:Column>
+				<t:Column>
+					<Label text="Conta Contábil"/>
+					<t:template>
+						<Input selectedKey="{itens>ContaContabil}"
+							textFormatMode="KeyValue"
+							showSuggestion="true"
+							showValueHelp="true"
+							valueHelpRequest="handleSearchConta"
+							suggestionItems="{
+								path: '/PlanoContas',
+								templateShareable: true
+							}"
+							id="contacontabil">
+							<suggestionItems>
+								<core:ListItem key="{Codigo}" text="{Descricao}"/>
+							</suggestionItems>
+						</Input>
+					</t:template>
+				</t:Column>
+				<t:Column>
+					<Label text="Centro de Custo"/>
+					<t:template>
+						<Input selectedKey="{path: 'itens>CentroCusto', type: 'sap.ui.model.odata.type.Int32'}"
+							textFormatMode="KeyValue"
+							showSuggestion="true"
+							showValueHelp="true"
+							valueHelpRequest="handleSearchCentro"
+							suggestionItems="{
+								path: '/CentroCustos',
+								templateShareable: true
+							}"
+							id="centrocusto">
+							<suggestionItems>
+								<core:ListItem key="{Id}" text="{Descricao}"/>
+							</suggestionItems>
+						</Input>
+					</t:template>
+				</t:Column>
+				<t:Column>
+					<Label text="CFOP"/>
+					<t:template>
+						<Input selectedKey="{itens>Cfop}"
+							textFormatMode="KeyValue"
+							showSuggestion="true"
+							showValueHelp="true"
+							valueHelpRequest="handleSearchCfop"
+							suggestionItems="{
+								path: '/Cfops',
+								templateShareable: true
+							}"
+							id="cfop">
+							<suggestionItems>
+								<core:ListItem key="{Codigo}" text="{Descricao}"/>
+							</suggestionItems>
+						</Input>
+					</t:template>
+				</t:Column>
+				<t:Column>
+					<Label text="Produto"/>
+					<t:template>
+						<Input selectedKey="{path: 'itens>Produto', type: 'sap.ui.model.odata.type.Int32'}"
+							textFormatMode="KeyValue"
+							showSuggestion="true"
+							showValueHelp="true"
+							valueHelpRequest="handleSearchProduto"
+							suggestionItems="{
+								path: '/Produtos',
+								templateShareable: true
+							}"
+							id="produto">
+							<suggestionItems>
+								<core:ListItem key="{Id}" text="{Descricao}"/>
+							</suggestionItems>
+						</Input>
+					</t:template>
+				</t:Column>
+				<t:Column>
+					<Label text="Quantidade"/>
+					<t:template>
+						<Input id="quantidade" value="{
+							path: 'itens>Quantidade',
+							type: 'sap.ui.model.odata.type.Single',
+							formatOptions: {
+								decimals: 2,
+								decimalSeparator: ','
+							}
+						}"/>
+					</t:template>
+				</t:Column>
+				<t:Column>
+					<Label text="Valor Unitário"/>
+					<t:template>
+						<Input id="valor" value="{
+							path: 'itens>ValorUnitario',
+							type: 'sap.ui.model.odata.type.Single',
+							formatOptions: {
+								decimals: 2,
+								decimalSeparator: ','
+							}
+						}"/>
+					</t:template>
+				</t:Column>
+				<t:Column>
+					<Label text="Total"/>
+					<t:template>
+						<Input id="totalitens" value="{
+							path: 'itens>Total',
+							type: 'sap.ui.model.odata.type.Single',
+							formatOptions: {
+								decimals: 2,
+								decimalSeparator: ','
+							}
+						}"/>
+					</t:template>
+				</t:Column>
+			</t:columns>
+		</t:Table>
+	</VBox> 
+</core:FragmentDefinition>

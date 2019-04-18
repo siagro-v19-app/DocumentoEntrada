@@ -1,0 +1,82 @@
+<mvc:View controllerName="br.com.idxtecDocumentoEntrada.controller.DocumentoEntradaLista"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table">
+	<App id="app">
+		<pages>
+			<Page id="pageDocumentoEntradaLista" showHeader="false" class="sapUiContentPadding" enableScrolling="true">
+				<content>
+					<t:Table id="tableDocumento"
+						selectionMode="Single"
+						selectionBehavior="Row"
+						class="sapUiSizeCondensed"
+						visibleRowCountMode="Auto"
+						enableBusyIndicator="true"
+						alternateRowColors="true">
+						<t:toolbar>
+							<Toolbar>
+								<Title text="Lista de Documentos de Entrada"/>
+								<ToolbarSpacer/>
+								<SearchField placeholder="Pesquisar tipo..." width="30%" search="filtraDoc"/>
+							</Toolbar>
+						</t:toolbar>
+						<t:Column id="columnEmpresa" filtered="true" width="10%" >
+							<Label text="Empresa" wrapping="true"/>
+							<t:template>
+								<Text text="{Empresa}" wrapping="false"/>
+							</t:template>
+						</t:Column>
+						<t:Column id="columnTipo" filterProperty="TipoDocumentoDetails/Descricao" sortProperty="TipoDocumentoDetails/Descricao">
+							<Label text="Tipo" wrapping="true"/>
+							<t:template>
+								<Text text="{TipoDocumentoDetails/Descricao}" wrapping="false"/>
+							</t:template>
+						</t:Column>
+						<t:Column filterProperty="TipoDocumento" sortProperty="TipoDocumento">
+							<Label text="Tipo de Documento" wrapping="true"/>
+							<t:template>
+								<Text text="{TipoDocumento}" wrapping="false"/>
+							</t:template>
+						</t:Column>
+						<t:Column filterProperty="TipoFormulario" sortProperty="TipoFormulario">
+							<Label text="Tipo de Formulário" wrapping="true"/>
+							<t:template>
+								<Text text="{TipoFormulario}" wrapping="false"/>
+							</t:template>
+						</t:Column>
+						<t:Column filterProperty="ParceiroNegocioDetails/RazaoSocial" sortProperty="ParceiroNegocioDetails/RazaoSocial">
+							<Label text="Parceiro" wrapping="true"/>
+							<t:template>
+								<Text text="{ParceiroNegocioDetails/RazaoSocial}" wrapping="false"/>
+							</t:template>
+						</t:Column>
+						<t:Column filterProperty="Emissao" sortProperty="Emissao">
+							<Label text="Emissão"/>
+							<t:template>
+								<Text text="{
+									path : 'Emissao',
+									type : 'sap.ui.model.type.Date',
+									formatOptions: {
+										style : 'short'
+									}}"
+									wrapping="false"/>
+							</t:template>
+						</t:Column>
+					</t:Table>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button id="incluir" text="Incluir novo" press="onIncluir" type="Emphasized"/>
+						<Button id="editar" text="Editar" press="onEditar"/>
+						<Button id="remover" text="Remover" press="onRemover"/>
+						<ToolbarSeparator/>
+						<Button icon="sap-icon://refresh" press="onRefresh"/>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

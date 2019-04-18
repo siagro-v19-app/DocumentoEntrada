@@ -1,0 +1,19 @@
+<mvc:View xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="br.com.idxtecDocumentoEntrada.controller.DocumentoEntradaEdit"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.ui.layout.form">
+	<Page id="pageDocumentoEntradaEdit" showHeader="false" class="sapUiContentPadding" enableScrolling="true">
+		<content>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="Salvar" press="salvar" type="Accept"/>
+   				<Button text="Fechar" press="fechar" type="Reject"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>
