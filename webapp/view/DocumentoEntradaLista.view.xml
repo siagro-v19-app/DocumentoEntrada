@@ -46,13 +46,13 @@
 								<Text text="{TipoFormulario}" wrapping="false"/>
 							</t:template>
 						</t:Column>
-						<t:Column filterProperty="ParceiroNegocioDetails/RazaoSocial" sortProperty="ParceiroNegocioDetails/RazaoSocial">
+						<t:Column filterProperty="ParceiroNegocioDetails/RazaoSocial" sortProperty="ParceiroNegocioDetails/RazaoSocial" width="300px">
 							<Label text="Parceiro" wrapping="true"/>
 							<t:template>
 								<Text text="{ParceiroNegocioDetails/RazaoSocial}" wrapping="false"/>
 							</t:template>
 						</t:Column>
-						<t:Column filterProperty="Emissao" sortProperty="Emissao">
+						<t:Column filterProperty="Emissao" sortProperty="Emissao" width="100px">
 							<Label text="Emissão"/>
 							<t:template>
 								<Text text="{

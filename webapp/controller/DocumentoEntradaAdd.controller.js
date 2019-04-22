@@ -2,6 +2,7 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/m/MessageBox",
 	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/routing/History",
 	"br/com/idxtecDocumentoEntrada/helpers/CentroCustoHelpDialog",
 	"br/com/idxtecDocumentoEntrada/helpers/CfopHelpDialog",
 	"br/com/idxtecDocumentoEntrada/helpers/CondicaoPagamentoHelpDialog",
@@ -12,7 +13,7 @@ sap.ui.define([
 	"br/com/idxtecDocumentoEntrada/helpers/ProdutoHelpDialog",
 	"br/com/idxtecDocumentoEntrada/helpers/TipoDocumentoHelpDialog",
 	"br/com/idxtecDocumentoEntrada/services/Session"
-], function(Controller, MessageBox, JSONModel, CentroCustoHelpDialog, CfopHelpDialog, CondicaoPagamentoHelpDialog,
+], function(Controller, MessageBox, JSONModel, History, CentroCustoHelpDialog, CfopHelpDialog, CondicaoPagamentoHelpDialog,
 	ContaContabilHelpDialog, ContratoCompraHelpDialog, NaturezaOperacaoHelpDialog, ParceiroNegocioHelpDialog,
 	ProdutoHelpDialog, TipoDocumentoHelpDialog, Session) {
 	"use strict";
@@ -32,53 +33,53 @@ sap.ui.define([
 			return this.getOwnerComponent().getModel( sModel );	
 		},
 		
-		handleSearchCentro: function(oEvent){
-			var sInputId = oEvent.getParameter("id");
-			CentroCustoHelpDialog.handleValueHelp(this.getView(), sInputId, this);
+		handleSearchCentro : function( oEvent ){
+			var sInputId = oEvent.getParameter( "id" );
+			CentroCustoHelpDialog.handleValueHelp( this.getView(), sInputId, this );
 		},
 		
-		handleSearchCfop: function(oEvent){
-			var sInputId = oEvent.getParameter("id");
-			CfopHelpDialog.handleValueHelp(this.getView(), sInputId, this);
+		handleSearchCfop : function( oEvent ){
+			var sInputId = oEvent.getParameter( "id" );
+			CfopHelpDialog.handleValueHelp( this.getView(), sInputId, this );
 		},
 		
-		handleSearchCondicao: function(oEvent){
-			var sInputId = oEvent.getParameter("id");
-			CondicaoPagamentoHelpDialog.handleValueHelp(this.getView(), sInputId, this);
+		handleSearchCondicao : function( oEvent ){
+			var sInputId = oEvent.getParameter( "id" );
+			CondicaoPagamentoHelpDialog.handleValueHelp( this.getView(), sInputId, this );
 		},
 		
-		handleSearchConta: function(oEvent){
-			var sInputId = oEvent.getParameter("id");
-			ContaContabilHelpDialog.handleValueHelp(this.getView(), sInputId, this);
+		handleSearchConta : function( oEvent ){
+			var sInputId = oEvent.getParameter( "id" );
+			ContaContabilHelpDialog.handleValueHelp( this.getView(), sInputId, this );
 		},
 		
-		handleSearchContrato: function(oEvent){
-			var sInputId = oEvent.getParameter("id");
-			ContratoCompraHelpDialog.handleValueHelp(this.getView(), sInputId, this);
+		handleSearchContrato : function( oEvent ){
+			var sInputId = oEvent.getParameter( "id" );
+			ContratoCompraHelpDialog.handleValueHelp( this.getView(), sInputId, this );
 		},
 		
-		handleSearchNatureza: function(oEvent){
-			var sInputId = oEvent.getParameter("id");
-			NaturezaOperacaoHelpDialog.handleValueHelp(this.getView(), sInputId, this);
+		handleSearchNatureza : function( oEvent ){
+			var sInputId = oEvent.getParameter( "id" );
+			NaturezaOperacaoHelpDialog.handleValueHelp( this.getView(), sInputId, this );
 		},
 		
-		handleSearchParceiro: function(oEvent){
-			var sInputId = oEvent.getParameter("id");
-			ParceiroNegocioHelpDialog.handleValueHelp(this.getView(), sInputId, this);
+		handleSearchParceiro : function( oEvent ){
+			var sInputId = oEvent.getParameter( "id" );
+			ParceiroNegocioHelpDialog.handleValueHelp( this.getView(), sInputId, this );
 		},
 		
-		handleSearchProduto: function(oEvent){
-			var sInputId = oEvent.getParameter("id");
-			ProdutoHelpDialog.handleValueHelp(this.getView(), sInputId, this);
+		handleSearchProduto : function( oEvent ){
+			var sInputId = oEvent.getParameter( "id" );
+			ProdutoHelpDialog.handleValueHelp( this.getView(), sInputId, this );
 		},
 		
-		handleSearchTipo: function(oEvent){
-			var sInputId = oEvent.getParameter("id");
-			TipoDocumentoHelpDialog.handleValueHelp(this.getView(), sInputId, this);
+		handleSearchTipo : function( oEvent ){
+			var sInputId = oEvent.getParameter( "id" );
+			TipoDocumentoHelpDialog.handleValueHelp( this.getView(), sInputId, this );
 		},
 		
-		_routerMatch: function(oEvent) {
-			var oViewModel = this.getModel("view");
+		_routerMatch : function( oEvent ) {
+			var oViewModel = this.getModel( "view" );
 			
 			oViewModel.setData({
 				titulo: "Inserir Documento"
@@ -87,8 +88,8 @@ sap.ui.define([
 			var oDocumentoModel = new JSONModel();
 			var oDocumentoItensModel = new JSONModel();
 			
-			var iEmpresaId = Session.get("EMPRESA_ID");
-			var iUsuarioId = Session.get("USUARIO_ID");
+			var iEmpresaId = Session.get( "EMPRESA_ID" );
+			var iUsuarioId = Session.get( "USUARIO_ID" );
 			
 			var sPathEmpresas = "/Empresas(" + iEmpresaId + ")";
 			var sPathUsuarios = "/Usuarios(" + iUsuarioId + ")";
@@ -122,28 +123,29 @@ sap.ui.define([
 			oDocumentoModel.setData(oDocumento);
 			oDocumentoItensModel.setData([]);
 			
-			this.getView().setModel(oDocumentoModel, "documento");
-			this.getView().setModel(oDocumentoItensModel, "itens");
+			this.getView().setModel( oDocumentoModel, "documento" );
+			this.getView().setModel( oDocumentoItensModel, "itens" );
 			
-			this.getView().byId("tipo").setValue(null);
-			this.getView().byId("parceiro").setValue(null);
-			this.getView().byId("contrato").setValue(null);
-			this.getView().byId("condicao").setValue(null);
+			this.getView().byId( "tipo" ).setValue( null );
+			this.getView().byId( "parceiro" ).setValue( null );
+			this.getView().byId( "contrato" ).setValue( null );
+			this.getView().byId( "condicao" ).setValue( null );
 		},
 		
-		onInserirLinha: function(oEvent) {
-			var oDocumentoItensModel = this.getView().getModel("itens");
+		onInserirLinha : function( oEvent ) {
+			var oDocumentoItensModel = this.getView().getModel( "itens" );
 			
-			var oItems = oDocumentoItensModel.getProperty("/");
+			var oItems = oDocumentoItensModel.getProperty( "/" );
 			
-			var iEmpresaId = Session.get("EMPRESA_ID");
-			var iUsuarioId = Session.get("USUARIO_ID");
+			var iEmpresaId = Session.get( "EMPRESA_ID" );
+			var iUsuarioId = Session.get( "USUARIO_ID" );
 			
 			var sPathEmpresas = "/Empresas(" + iEmpresaId + ")";
 			var sPathUsuarios = "/Usuarios(" + iUsuarioId + ")";
 			
 			var oNovoItem = oItems.concat({
 				Id: 0,
+				DocumentoEntrada: 0, 
 	    		Natureza: "",
 				ContaContabil: "",
 				CentroCusto: 0,
@@ -158,43 +160,58 @@ sap.ui.define([
 				UsuarioDetails: { __metadata: { uri: sPathUsuarios } }
 	    });
 			
-			this.getView().getModel("itens").setProperty("/", oNovoItem);
+			this.getView().getModel( "itens" ).setProperty( "/", oNovoItem );
 		},
 		
-		onRemoverLinha: function(oEvent){
-			var oDocumentoItensModel = this.getView().getModel("itens");
+		onRemoverLinha : function( oEvent ){
+			var oDocumentoItensModel = this.getView().getModel( "itens" );
 			
-			var oTable = this.getView().byId("tableDocumentoItens");
+			var oTable = this.getView().byId( "tableDocumentoItens" );
 			
 			var nIndex = oTable.getSelectedIndex();
 			
-			if (nIndex > -1) {
-				var oItems = oDocumentoItensModel.getProperty("/");
+			if ( nIndex > -1 ) {
+				var oItems = oDocumentoItensModel.getProperty( "/" );
 				
-				oItems.splice(nIndex, 1);
-				oDocumentoItensModel.setProperty("/", oItems);
+				oItems.splice( nIndex, 1 );
+				oDocumentoItensModel.setProperty( "/", oItems );
 				oTable.clearSelection();
 			} else {
-				sap.m.MessageBox.warning("Selecione um item na tabela!");
+				sap.m.MessageBox.warning( "Selecione um item na tabela!" );
 			}
 		},
 		
 		salvar: function() {
 			var that = this;
-			var oDocumentoModel = this.getView().getModel("documento");
-			var oDocumentoItensModel = this.getView().getModel("itens");
+			var oDocumentoModel = this.getView().getModel( "documento" );
+			var oDocumentoItensModel = this.getView().getModel( "itens" );
 			var oModel = this.getModel();
 			
 			var oDadosDocumento = oDocumentoModel.getData();
 			var oDadosItens = oDocumentoItensModel.getData();
 			
-			/*if(this._verificaCabecalho(this.getView(),oDadosDocumento,oDadosItens)){
+			if(this._verificaCabecalho( this.getView(), oDadosItens )){
 				return;
 			}
 			
-			if(this._verificaLinhas(oDadosVariedade, soma, oDadosDocumento.Area)){
+			if(this._verificaLinhas( oDadosItens )){
 				return;
-			}*/
+			}
+			
+			oModel.create( "/DocumentoEntradas", this._getDados( oDadosDocumento, oDadosItens ), {
+				success: function(){
+					sap.m.MessageBox.success("Documento de Entrada inserido com sucesso!",{
+						onClose: function() {
+							that.navBack();
+						}
+					});
+				}
+			});
+		},
+		
+		_getDados: function( oDadosDocumento, oDadosItens ){
+
+			oDadosDocumento.CondicaoPagamento = oDadosDocumento.CondicaoPagamento ? oDadosDocumento.CondicaoPagamento : 0;
 			
 			var sPathTipo = "/TipoDocumentos(" + oDadosDocumento.Tipo + ")";
 			var sPathParceiro = "/ParceiroNegocios(" + oDadosDocumento.Parceiro + ")";
@@ -208,6 +225,8 @@ sap.ui.define([
 			oDadosDocumento.DocumentoEntradaItensDetails = [];
 		
 			for ( var i = 0; i < oDadosItens.length; i++) {
+				
+				oDadosItens[i].CentroCusto = oDadosItens[i].CentroCusto ? oDadosItens[i].CentroCusto : 0;
 				
 				var iNaturezaId = oDadosItens[i].Natureza;
 				var iContaContabilId = oDadosItens[i].ContaContabil;
@@ -229,19 +248,36 @@ sap.ui.define([
 
 				oDadosDocumento.DocumentoEntradaItensDetails.push(oDadosItens[i]);
 			}
-			debugger;
-			oModel.create("/DocumentoEntradas", oDadosDocumento, {
-				success: function(){
-					sap.m.MessageBox.success("Documento de Entrada inserido com sucesso!",{
-						onClose: function() {
-							that.navBack();
-						}
-					});
-				}
-			});
+
+			return oDadosDocumento;
 		},
 		
-		navBack: function(){
+		onCalculaTotal : function( oEvent ) {
+			var oDocumentoItensModel = this.getView().getModel( "itens" );
+			var aItems = oDocumentoItensModel.getData();
+			
+			for( var i = 0; i < aItems.length; i++ ) {
+				aItems[i].Total = aItems[i].Quantidade * aItems[i].ValorUnitario;                                                  
+			}
+	
+			oDocumentoItensModel.refresh( true );
+			this._totalPedido();
+		},
+		
+		_totalPedido : function() {
+			var oDocumentoItensModel = this.getView().getModel( "itens" );
+			var aItems = oDocumentoItensModel.getData();
+			var nTotal = 0;
+			
+			for( var i = 0; i < aItems.length; i++) {
+				nTotal += aItems[i].Total;
+			}
+
+			this.getView().getModel( "documento" ).setProperty( "/Total", nTotal );
+			
+		},
+		
+		navBack : function(){
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
@@ -253,7 +289,7 @@ sap.ui.define([
 			}
 		},
 		
-		_getFormFragment: function (sFragmentName) {
+		_getFormFragment : function ( sFragmentName ) {
 			if (this._formFragment) {
 				return this._formFragment;
 			}
@@ -263,16 +299,16 @@ sap.ui.define([
 			return this._formFragment;
 		},
 
-		showFormFragment : function (sFragmentName) {
+		showFormFragment : function ( sFragmentName ) {
 			var oPage = this.getView().byId("pageDocumentoEntradaAdd");
 			oPage.removeAllContent();
 			oPage.insertContent(this._getFormFragment(sFragmentName));
 		},
 		
-		fechar: function(oEvent) {
+		fechar : function( oEvent ) {
 			var oTable = this.getView().byId("tableDocumentoItens");
 			var that = this;
-			console.log(oTable.getBinding().getLength());
+
 			if(oTable.getBinding().getLength() >= 1){
 				sap.m.MessageBox.confirm("Todas as informações serão descartadas, deseja continuar?", {
 					onClose: function(sResposta){
@@ -283,6 +319,26 @@ sap.ui.define([
 				});
 			} else{
 				this.navBack();
+			}
+		},
+		
+		_verificaCabecalho : function( oView, oDadosItens ){
+			if(oView.byId("tipo").getValue() === "" || oView.byId("parceiro").getValue() === ""
+			|| oView.byId("emissao").getDateValue() === ""){
+				MessageBox.warning("Preencha todos os campos!");
+				return true;
+			} else if(oDadosItens.length === 0) {
+				MessageBox.warning("Documento não possui itens.");
+				return true; 
+			} 
+		},
+		
+		_verificaLinhas : function( oDadosItens ){
+			for( var i=0; i<oDadosItens.length; i++ ){
+				if(oDadosItens[i].Natureza === "" || oDadosItens[i].Produto === 0){
+					MessageBox.warning("Preencha todos os campos obrigatórios!");
+					return true;
+				}
 			}
 		}
 	});

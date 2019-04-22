@@ -34,7 +34,7 @@ sap.ui.define([
 			var iEmpresaId = Session.get("EMPRESA_ID");
 			
 			var oFilter1 = new Filter("Empresa", FilterOperator.EQ, iEmpresaId);
-			var oFilter2 = new Filter("Descricao", FilterOperator.Contains, sQuery);
+			var oFilter2 = new Filter("TipoDocumentoDetails/Descricao", FilterOperator.Contains, sQuery);
 			
 			var aFilters = [
 				oFilter1,

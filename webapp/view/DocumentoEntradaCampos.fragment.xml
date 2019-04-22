@@ -169,7 +169,7 @@
 						decimals: 2,
 						decimalSeparator: ','
 					}
-				}"/>
+				}" change="onCalculaTotal" editable="false"/>
 				
 				<Label text="Observações" labelFor="obs"/>
 				<TextArea id="obs" value="{documento>/Observacoes}" rows="6"/>
@@ -198,8 +198,8 @@
 				</Toolbar>
 			</t:toolbar>
 			<t:columns>
-				<t:Column>
-					<Label text="Natureza"/>
+				<t:Column width="300px">
+					<Label text="Natureza" required="true"/>
 					<t:template>
 						<Input selectedKey="{itens>Natureza}"
 							textFormatMode="KeyValue"
@@ -217,7 +217,26 @@
 						</Input>
 					</t:template>
 				</t:Column>
-				<t:Column>
+				<t:Column width="300px">
+					<Label text="Produto" required="true"/>
+					<t:template>
+						<Input selectedKey="{path: 'itens>Produto', type: 'sap.ui.model.odata.type.Int32'}"
+							textFormatMode="KeyValue"
+							showSuggestion="true"
+							showValueHelp="true"
+							valueHelpRequest="handleSearchProduto"
+							suggestionItems="{
+								path: '/Produtos',
+								templateShareable: true
+							}"
+							id="produto">
+							<suggestionItems>
+								<core:ListItem key="{Id}" text="{Descricao}"/>
+							</suggestionItems>
+						</Input>
+					</t:template>
+				</t:Column>
+				<t:Column width="300px">
 					<Label text="Conta Contábil"/>
 					<t:template>
 						<Input selectedKey="{itens>ContaContabil}"
@@ -236,7 +255,7 @@
 						</Input>
 					</t:template>
 				</t:Column>
-				<t:Column>
+				<t:Column width="300px">
 					<Label text="Centro de Custo"/>
 					<t:template>
 						<Input selectedKey="{path: 'itens>CentroCusto', type: 'sap.ui.model.odata.type.Int32'}"
@@ -255,7 +274,7 @@
 						</Input>
 					</t:template>
 				</t:Column>
-				<t:Column>
+				<t:Column width="300px">
 					<Label text="CFOP"/>
 					<t:template>
 						<Input selectedKey="{itens>Cfop}"
@@ -274,26 +293,7 @@
 						</Input>
 					</t:template>
 				</t:Column>
-				<t:Column>
-					<Label text="Produto"/>
-					<t:template>
-						<Input selectedKey="{path: 'itens>Produto', type: 'sap.ui.model.odata.type.Int32'}"
-							textFormatMode="KeyValue"
-							showSuggestion="true"
-							showValueHelp="true"
-							valueHelpRequest="handleSearchProduto"
-							suggestionItems="{
-								path: '/Produtos',
-								templateShareable: true
-							}"
-							id="produto">
-							<suggestionItems>
-								<core:ListItem key="{Id}" text="{Descricao}"/>
-							</suggestionItems>
-						</Input>
-					</t:template>
-				</t:Column>
-				<t:Column>
+				<t:Column width="150px">
 					<Label text="Quantidade"/>
 					<t:template>
 						<Input id="quantidade" value="{
@@ -303,10 +303,10 @@
 								decimals: 2,
 								decimalSeparator: ','
 							}
-						}"/>
+						}" change="onCalculaTotal"/>
 					</t:template>
 				</t:Column>
-				<t:Column>
+				<t:Column width="150px">
 					<Label text="Valor Unitário"/>
 					<t:template>
 						<Input id="valor" value="{
@@ -316,10 +316,10 @@
 								decimals: 2,
 								decimalSeparator: ','
 							}
-						}"/>
+						}" change="onCalculaTotal"/>
 					</t:template>
 				</t:Column>
-				<t:Column>
+				<t:Column width="150px">
 					<Label text="Total"/>
 					<t:template>
 						<Input id="totalitens" value="{
@@ -329,7 +329,7 @@
 								decimals: 2,
 								decimalSeparator: ','
 							}
-						}"/>
+						}" editable="false"/>
 					</t:template>
 				</t:Column>
 			</t:columns>
